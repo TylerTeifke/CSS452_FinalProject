@@ -1,6 +1,7 @@
 /* 
- * File: light.js
+ * File: light_source.js
  * Defines a simple light source
+ * code is based off of this code from the book: https://github.com/Apress/build-your-own-2d-game-engine-2e/blob/main/BookSourceCode/chapter8/8.3.multiple_lights/src/engine/lights/light.js
  */
 "use strict";
 
@@ -10,7 +11,6 @@ class Light {
 
     constructor() {
         this.lightColor = vec4.fromValues(0.1, 0.1, 0.1, 1);  // light color
-        this.mPosition = vec3.fromValues(0, 0, 5); // light position in WC
         this.lightRange = 5; // range of the light
         this.mPlacement = new Transform();
     }
@@ -32,9 +32,6 @@ class Light {
     setBrightness(val) { this.lightColor[3] = val; }
     getBrightness() { return this.lightColor[3]; }
     incBrightnessBy(delta){ this.lightColor[3] += delta; }
-
-    isLightOn() { return this.mIsOn; }
-    setLightTo(on) { this.mIsOn = on; }
 }
 
 export default Light;
