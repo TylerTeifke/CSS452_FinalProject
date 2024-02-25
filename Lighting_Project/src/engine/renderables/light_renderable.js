@@ -10,6 +10,7 @@ import * as shaderResources from "../core/shader_resources.js";
 
 class LightRenderable extends TextureRenderable{
     constructor(myTexture){
+        super(myTexture);
         //super._setShader(shaderResources.getLightShader());
 
         //Will hold all light source objects
@@ -23,7 +24,7 @@ class LightRenderable extends TextureRenderable{
     draw(camera){
         super.draw(camera);
 
-        //Will draw all light source on a light renderable object object
+        //Will draw all light sources on a light renderable object
         let i;
         for(i = 0; i < this.lightSources.length; i++){
             this.lightSources[i].draw(camera);
