@@ -27,7 +27,7 @@ class LightRenderable extends TextureRenderable{
         //Will draw all light sources on a light renderable object
         let i;
         for(i = 0; i < this.lightSources.length; i++){
-            this.mShader.setCameraAndLight(camera, lightSources[i]);
+            this.mShader.setCameraAndLight(camera, this.lightSources[i]);
         }
     }
 
