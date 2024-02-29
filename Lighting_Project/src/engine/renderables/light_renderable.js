@@ -11,7 +11,7 @@ import * as shaderResources from "../core/shader_resources.js";
 class LightRenderable extends TextureRenderable{
     constructor(myTexture){
         super(myTexture);
-        //super._setShader(shaderResources.getLightShader());
+        super._setShader(shaderResources.getLightShader());
 
         //Will hold all light source objects
         this.lightSources = [];

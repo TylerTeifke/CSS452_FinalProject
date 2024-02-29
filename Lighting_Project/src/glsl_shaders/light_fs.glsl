@@ -18,12 +18,11 @@ uniform float uGlobalAmbientIntensity;
 // Light information
 
 struct Light  {
-    vec3 Position;   // in pixel space!
+    vec2 Position;   // in pixel space!
     vec4 Color;
     float Near;     // distance in pixel space
     float Far;     // distance in pixel space
     float Intensity;
-    bool  IsOn;
 };
 uniform Light uLight;  // Light source
 
@@ -36,7 +35,7 @@ vec4 LightEffect(Light lgt)
 {
     vec4 result = vec4(0);
     float strength = 0.0;
-    float dist = length(lgt.Position.xyz - gl_FragCoord.xyz);
+    float dist = length(lgt.Position.xy - gl_FragCoord.xy);
     if (dist <= lgt.Far) {
         if (dist <= lgt.Near)
             strength = 1.0;  //  no attenuation
