@@ -34,4 +34,4 @@ class Light {
     incBrightnessBy(delta){ this.lightColor[3] += delta; }
 }
 
-export default Light;
+export default LightSource;

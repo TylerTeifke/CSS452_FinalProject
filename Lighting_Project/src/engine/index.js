@@ -37,12 +37,14 @@ import TextureRenderable from "./renderables/texture_renderable.js";
 import SpriteRenderable from "./renderables/sprite_renderable.js";
 import SpriteAnimateRenderable from "./renderables/sprite_animate_renderable.js";
 import FontRenderable from "./renderables/font_renderable.js";
+import LightRenderable from "./renderables/light_renderable.js";
 import { eTexCoordArrayIndex } from "./renderables/sprite_renderable.js";
 import { eAnimationType } from "./renderables/sprite_animate_renderable.js";
 
 // game objects
 import GameObject from "./game_objects/game_object.js";
 import GameObjectSet from "./game_objects/game_object_set.js";
+import LightSource from "./game_objects/light_source.js";
 
 // local to this file only
 import * as glSys from "./core/gl.js";
@@ -91,10 +93,10 @@ export default {
     Camera, Scene, Transform, BoundingBox,  
     
     // Renderables
-    Renderable, TextureRenderable, SpriteRenderable, SpriteAnimateRenderable, FontRenderable,
+    Renderable, TextureRenderable, SpriteRenderable, SpriteAnimateRenderable, FontRenderable, LightRenderable,
 
     // Game Objects
-    GameObject, GameObjectSet,
+    GameObject, GameObjectSet, LightSource,
 
     // constants
     eTexCoordArrayIndex, eAnimationType, eBoundCollideStatus,
