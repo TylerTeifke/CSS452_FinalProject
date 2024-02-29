@@ -49,8 +49,8 @@ class LightShader extends SpriteShader {
             let c = this.mLight.getColor();
             gl.uniform4fv(this.mColorRef, c);
             gl.uniform2fv(this.mPosRef, this.mLight.getXform().getPosition());
-            gl.uniform1f(this.mNearRef, this.mLight.lightRange());
-            gl.uniform1f(this.mFarRef, this.mLight.lightRange() * 2);
+            gl.uniform1f(this.mNearRef, this.mLight.getLightRange());
+            gl.uniform1f(this.mFarRef, this.mLight.getLightRange() * 2);
             gl.uniform1f(this.mIntensityRef, c[3]);
             gl.uniform4fv(this.mGlobalAmbientColorRef, defaultResources.getGlobalAmbientColor());
             gl.uniform1f(this.mGlobalAmbientIntensityRef, defaultResources.getGlobalAmbientIntensity());
