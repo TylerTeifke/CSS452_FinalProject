@@ -7,7 +7,7 @@
 
 import Transform from "../utils/transform.js";
 
-class Light {
+class LightSource {
 
     constructor() {
         this.lightColor = vec4.fromValues(0.1, 0.1, 0.1, 1);  // light color

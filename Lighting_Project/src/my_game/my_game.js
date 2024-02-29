@@ -60,6 +60,10 @@ class MyGame extends engine.Scene {
         // sets the background to gray
 
         let testLight = new engine.LightSource();
+        testLight.getXform().setSize(100, 100);
+        testLight.getXform().setPosition(150, 150);
+        testLight.setLightRange(40);
+        testLight.setBrightness(10);
 
         //Background object that will be used to test our lighting system
         this.lightingTest = new engine.LightRenderable(this.kBg);
@@ -78,7 +82,6 @@ class MyGame extends engine.Scene {
 
     _drawCamera(camera) {
         camera.setViewAndCameraMatrix();
-        this.lightingTest.draw(camera);
     }
 
     // This is the draw function, make sure to setup proper drawing environment, and more
@@ -90,18 +93,47 @@ class MyGame extends engine.Scene {
         // Step  B: Draw with all three cameras
         this._drawCamera(this.mCamera);
         this.mMsg.draw(this.mCamera);   // only draw status in the main camera
-        this.lightingTest.draw(camera);
+        this.lightingTest.draw(this.mCamera);
 
     }
     // The update function, updates the application state. Make sure to _NOT_ draw
     // anything from this function!
     update() {
         let zoomDelta = 0.05;
-        let msg = "L/R: Left or Right Minion; H: Dye; P: Portal]: ";
+        let msg = "Arrow keys: Control light position; z/x; range j/k: brightness";
 
         this.mCamera.update();  // for smoother camera movements
-        
 
+        //Will change the position of the light
+        if (engine.input.isKeyPressed(engine.input.keys.Left)) {
+            this.lightingTest.getLightSource(0).getXform().incXPosBy(-1);
+        }
+        if (engine.input.isKeyPressed(engine.input.keys.Right)) {
+            this.lightingTest.getLightSource(0).getXform().incXPosBy(1);
+        }
+        if (engine.input.isKeyPressed(engine.input.keys.Up)) {
+            this.lightingTest.getLightSource(0).getXform().incYPosBy(1);
+        }
+        if (engine.input.isKeyPressed(engine.input.keys.Down)) {
+            this.lightingTest.getLightSource(0).getXform().incYPosBy(-1);
+        }
+
+        //Will change the range of the light
+        if (engine.input.isKeyPressed(engine.input.keys.Z)){
+            this.lightingTest.getLightSource(0).incLightRangeBy(1);
+        }
+        if (engine.input.isKeyPressed(engine.input.keys.X)){
+            this.lightingTest.getLightSource(0).incLightRangeBy(-1);
+        }
+
+        //Will increase and decrease the brightness of the light
+        if (engine.input.isKeyPressed(engine.input.keys.K)){
+            this.lightingTest.getLightSource(0).incBrightnessBy(0.1);
+        }
+        if (engine.input.isKeyPressed(engine.input.keys.J)){
+            this.lightingTest.getLightSource(0).incBrightnessBy(-0.1);
+        }
+        
         msg += " X=" + engine.input.getMousePosX() + " Y=" + engine.input.getMousePosY();
         this.mMsg.setText(msg);
     }

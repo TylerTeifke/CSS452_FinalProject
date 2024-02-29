@@ -8,7 +8,8 @@
 "use strict";
 
 import SpriteShader from "./sprite_shader.js";
-import ShaderLightAt from "./shader_light_at.js";
+import * as glSys from "../core/gl.js";
+import * as defaultResources from "../resources/default_resources.js";
 
 class LightShader extends SpriteShader {
     constructor(vertexShaderPath, fragmentShaderPath) {
@@ -21,8 +22,6 @@ class LightShader extends SpriteShader {
         //global light variables that will make it so the light affects the entire game world
         this.mGlobalAmbientColorRef = null; // global light of the game world
         this.mGlobalAmbientIntensityRef = null; // intensity of global light
-
-        this.mShaderLight = new ShaderLightAt(this.mCompiledShader, 0);
 
         let gl = glSys.get();
 
@@ -43,14 +42,14 @@ class LightShader extends SpriteShader {
 
         let gl = glSys.get();
 
-        let p = aCamera.wcPosToPixel(aLight.getXform().getPosition());
-        let n = aCamera.wcSizeToPixel(aLight.lightRange());
-        let f = aCamera.wcSizeToPixel(aLight.lightRange() * 2);
-        let c = aLight.getColor();
+        //let p = aCamera.wcPosToPixel(aLight.getXform().getPosition());
+        //let n = aCamera.wcSizeToPixel(aLight.lightRange());
+        //let f = aCamera.wcSizeToPixel(aLight.lightRange() * 2);
+        let c = this.mLight.getColor();
         gl.uniform4fv(this.mColorRef, c);
-        gl.uniform2fv(this.mPosRef, vec2.fromValues(p[0], p[1]));
-        gl.uniform1f(this.mNearRef, n);
-        gl.uniform1f(this.mFarRef, f);
+        gl.uniform2fv(this.mPosRef, this.mLight.getXform().getPosition());
+        gl.uniform1f(this.mNearRef, this.mLight.lightRange());
+        gl.uniform1f(this.mFarRef, this.mLight.lightRange() * 2);
         gl.uniform1f(this.mIntensityRef, c[3]);
         gl.uniform4fv(this.mGlobalAmbientColorRef, defaultResources.getGlobalAmbientColor());
         gl.uniform1f(this.mGlobalAmbientIntensityRef, defaultResources.getGlobalAmbientIntensity());
