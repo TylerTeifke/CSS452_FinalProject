@@ -21,7 +21,7 @@ class LightSource {
         this.lightColor[1] = rgb[1];
         this.lightColor[2] = rgb[2];
     }
-    getColor() { return this.mColor; }
+    getColor() { return this.lightColor; }
 
     getXform() { return this.mPlacement; }
 

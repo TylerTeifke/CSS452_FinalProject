@@ -92,9 +92,8 @@ class MyGame extends engine.Scene {
 
         // Step  B: Draw with all three cameras
         this._drawCamera(this.mCamera);
-        this.mMsg.draw(this.mCamera);   // only draw status in the main camera
         this.lightingTest.draw(this.mCamera);
-
+        this.mMsg.draw(this.mCamera);   // only draw status in the main camera
     }
     // The update function, updates the application state. Make sure to _NOT_ draw
     // anything from this function!
