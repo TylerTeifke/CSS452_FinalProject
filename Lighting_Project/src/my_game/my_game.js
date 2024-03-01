@@ -22,6 +22,7 @@ class MyGame extends engine.Scene {
         this.mBg = null;
 
         this.mMsg = null;
+        this.mTutorialMsg = null;
 
         // the hero and the support objects
         this.mHero = null;
@@ -54,7 +55,7 @@ class MyGame extends engine.Scene {
         this.mCamera = new engine.Camera(
             vec2.fromValues(50, 36), // position of the camera
             100,                       // width of camera
-            [0, 0, 640, 330]           // viewport (orgX, orgY, width, height)
+            [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
         );
         this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
         // sets the background to gray
@@ -73,11 +74,17 @@ class MyGame extends engine.Scene {
 
         this.lightingTest.addLightSource(testLight);
 
-        // Message to display the controls
+        // Message to display values
         this.mMsg = new engine.FontRenderable("Status Message");
         this.mMsg.setColor([1, 1, 1, 1]);
-        this.mMsg.getXform().setPosition(1, 14);
-        this.mMsg.setTextHeight(3);
+        this.mMsg.getXform().setPosition(1, 1);
+        this.mMsg.setTextHeight(2);
+
+        // Message to display the controls
+        this.mTutorialMsg = new engine.FontRenderable("Status Message");
+        this.mTutorialMsg.setColor([1, 1, 1, 1]);
+        this.mTutorialMsg.getXform().setPosition(1, 10);
+        this.mTutorialMsg.setTextHeight(2);
     }
 
     _drawCamera(camera) {
@@ -94,12 +101,14 @@ class MyGame extends engine.Scene {
         this._drawCamera(this.mCamera);
         this.lightingTest.draw(this.mCamera);
         this.mMsg.draw(this.mCamera);   // only draw status in the main camera
+        this.mTutorialMsg.draw(this.mCamera);   // only draw status in the main camera
     }
     // The update function, updates the application state. Make sure to _NOT_ draw
     // anything from this function!
     update() {
         let zoomDelta = 0.05;
-        let msg = "Arrow keys: Control light position; z/x; range j/k: brightness";
+        let TutorialMsg = "Move light: Arrow Keys\nChange Range: Z/X \nBrightness: J/K";
+        let msg = "";
 
         this.mCamera.update();  // for smoother camera movements
 
@@ -118,23 +127,38 @@ class MyGame extends engine.Scene {
         }
 
         //Will change the range of the light
-        if (engine.input.isKeyPressed(engine.input.keys.Z)){
+        if (engine.input.isKeyPressed(engine.input.keys.Z)) {
             this.lightingTest.getLightSource(0).incLightRangeBy(1);
         }
-        if (engine.input.isKeyPressed(engine.input.keys.X)){
+        if (engine.input.isKeyPressed(engine.input.keys.X)) {
             this.lightingTest.getLightSource(0).incLightRangeBy(-1);
         }
 
         //Will increase and decrease the brightness of the light
-        if (engine.input.isKeyPressed(engine.input.keys.K)){
+        if (engine.input.isKeyPressed(engine.input.keys.K)) {
             this.lightingTest.getLightSource(0).incBrightnessBy(0.1);
         }
-        if (engine.input.isKeyPressed(engine.input.keys.J)){
+        if (engine.input.isKeyPressed(engine.input.keys.J)) {
             this.lightingTest.getLightSource(0).incBrightnessBy(-0.1);
         }
-        
-        msg += " X=" + engine.input.getMousePosX() + " Y=" + engine.input.getMousePosY();
+
+        // I was having issues with how JavaScript can't let me explicitly 
+        // define the type to lightSource, so I had to save it in memory
+
+        const lightSource = this.lightingTest.getLightSource(0);
+
+        const lightX = lightSource.getXform().getXPos();
+        const lightY = lightSource.getXform().getYPos();
+        msg += "X=" + lightX + " Y=" + lightY;
+
+        const lightRange = lightSource.getLightRange();
+        msg += " Range=" + lightRange;
+
+        const lightBrightness = lightSource.getBrightness();
+        msg += " Bright=" + lightBrightness;
+
         this.mMsg.setText(msg);
+        this.mTutorialMsg.setText(TutorialMsg);
     }
 }
 

@@ -16,7 +16,7 @@ class LightSource {
     }
 
     // simple setters and getters
-    setColor(rgb) { 
+    setColor(rgb) {
         this.lightColor[0] = rgb[0];
         this.lightColor[1] = rgb[1];
         this.lightColor[2] = rgb[2];
@@ -25,13 +25,13 @@ class LightSource {
 
     getXform() { return this.mPlacement; }
 
-    setLightRange(val){ this.lightRange = val; }
-    incLightRangeBy(delta){ this.lightRange += delta; }
-    getLightRange(){ return this.lightRange; }
+    setLightRange(val) { this.lightRange = val; }
+    incLightRangeBy(delta) { this.lightRange += delta; }
+    getLightRange() { return this.lightRange; }
 
     setBrightness(val) { this.lightColor[3] = val; }
     getBrightness() { return this.lightColor[3]; }
-    incBrightnessBy(delta){ this.lightColor[3] += delta; }
+    incBrightnessBy(delta) { this.lightColor[3] += delta; }
 }
 
 export default LightSource;

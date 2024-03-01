@@ -21,20 +21,25 @@ class FontRenderable {
     }
 
     draw(camera) {
-        // we will draw the text string by calling to mOneChar for each of the
-        // chars in the mText string.
         let widthOfOneChar = this.mXform.getWidth() / this.mText.length;
         let heightOfOneChar = this.mXform.getHeight();
-        // this.mOneChar.getXform().SetRotationInRad(this.mXform.getRotationInRad());
         let yPos = this.mXform.getYPos();
-
-        // center position of the first char
         let xPos = this.mXform.getXPos() - (widthOfOneChar / 2) + (widthOfOneChar * 0.5);
         let charIndex, aChar, charInfo, xSize, ySize, xOffset, yOffset;
+
         for (charIndex = 0; charIndex < this.mText.length; charIndex++) {
             aChar = this.mText.charCodeAt(charIndex);
+
+            // Added this to handle new lines because I wanted it all to fit on screen
+            if (aChar === 10) { // ASCII code for "\n"
+                // Move to the next line
+                xPos = this.mXform.getXPos() - (widthOfOneChar / 2) + (widthOfOneChar * 0.5);
+                yPos -= heightOfOneChar;
+                continue;
+            }
+
             charInfo = font.getCharInfo(this.mFontName, aChar);
-            
+
             // set the texture coordinate
             this.mOneChar.setElementUVCoordinate(charInfo.mTexCoordLeft, charInfo.mTexCoordRight,
                 charInfo.mTexCoordBottom, charInfo.mTexCoordTop);
@@ -79,7 +84,7 @@ class FontRenderable {
     setColor(c) { this.mOneChar.setColor(c); }
     getColor() { return this.mOneChar.getColor(); }
 
-    update() {}
+    update() { }
 
     /*
      * this can be a potentially useful function. Not included/tested in this version of the engine
