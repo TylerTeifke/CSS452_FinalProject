@@ -149,13 +149,13 @@ class MyGame extends engine.Scene {
 
         const lightX = lightSource.getXform().getXPos();
         const lightY = lightSource.getXform().getYPos();
-        msg += "X =" + lightX + " Y =" + lightY;
+        msg += "X=" + lightX + " Y=" + lightY;
 
         const lightRange = lightSource.getLightRange();
-        msg += " Range =" + lightRange;
+        msg += " Range=" + lightRange;
 
         const lightBrightness = lightSource.getBrightness();
-        msg += " Brightness =" + lightBrightness;
+        msg += " Brightness=" + lightBrightness;
 
         this.mMsg.setText(msg);
         this.mTutorialMsg.setText(TutorialMsg);
