@@ -16,10 +16,19 @@ class LightSource {
     }
 
     // simple setters and getters
-    setColor(rgb) {
-        this.lightColor[0] = rgb[0];
-        this.lightColor[1] = rgb[1];
-        this.lightColor[2] = rgb[2];
+    setColor(r,g,b) {
+        this.lightColor[0] = r;
+        this.lightColor[1] = g;
+        this.lightColor[2] = b;
+    }
+    incRedBy(delta){
+        this.lightColor[0] += delta;
+    }
+    incGreenBy(delta){
+        this.lightColor[1] += delta;
+    }
+    incBlueBy(delta){
+        this.lightColor[2] += delta;
     }
     getColor() { return this.lightColor; }
 

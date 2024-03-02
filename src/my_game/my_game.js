@@ -83,7 +83,7 @@ class MyGame extends engine.Scene {
         // Message to display the controls
         this.mTutorialMsg = new engine.FontRenderable("Status Message");
         this.mTutorialMsg.setColor([1, 1, 1, 1]);
-        this.mTutorialMsg.getXform().setPosition(1, 10);
+        this.mTutorialMsg.getXform().setPosition(1, 15);
         this.mTutorialMsg.setTextHeight(2);
     }
 
@@ -107,7 +107,8 @@ class MyGame extends engine.Scene {
     // anything from this function!
     update() {
         let zoomDelta = 0.05;
-        let TutorialMsg = "Move light: Arrow Keys\nChange Range: Z/X \nBrightness: J/K";
+        let TutorialMsg = "Move light: Arrow Keys\nChange Range: Z/X \nBrightness: J/K \nChange Red Value: Q/W"
+        + "\nChange Green Value: E/R \nChange Blue Value: T/Y";
         let msg = "";
 
         this.mCamera.update();  // for smoother camera movements
@@ -140,6 +141,27 @@ class MyGame extends engine.Scene {
         }
         if (engine.input.isKeyPressed(engine.input.keys.J)) {
             this.lightingTest.getLightSource(0).incBrightnessBy(-0.1);
+        }
+
+        //Will increase and decrease the amount of red/green/blue
+        //is in the light
+        if(engine.input.isKeyPressed(engine.input.keys.W)){
+            this.lightingTest.getLightSource(0).incRedBy(0.01);
+        }
+        if(engine.input.isKeyPressed(engine.input.keys.Q)){
+            this.lightingTest.getLightSource(0).incRedBy(-0.01);
+        }
+        if(engine.input.isKeyPressed(engine.input.keys.R)){
+            this.lightingTest.getLightSource(0).incGreenBy(0.01);
+        }
+        if(engine.input.isKeyPressed(engine.input.keys.E)){
+            this.lightingTest.getLightSource(0).incGreenBy(-0.01);
+        }
+        if(engine.input.isKeyPressed(engine.input.keys.Y)){
+            this.lightingTest.getLightSource(0).incBlueBy(0.01);
+        }
+        if(engine.input.isKeyPressed(engine.input.keys.T)){
+            this.lightingTest.getLightSource(0).incBlueBy(-0.01);
         }
 
         // I was having issues with how JavaScript can't let me explicitly 
