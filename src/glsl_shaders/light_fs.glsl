@@ -16,6 +16,7 @@ uniform vec4 uGlobalAmbientColor; // this is shared globally
 uniform float uGlobalAmbientIntensity;
 
 // Light information
+#define MAX_LIGHTS 8
 
 struct Light  {
     vec2 Position;   // in pixel space!
@@ -24,7 +25,8 @@ struct Light  {
     float Far;     // distance in pixel space
     float Intensity;
 };
-uniform Light uLight;  // Light source
+
+uniform Light uLights[MAX_LIGHTS];  // Light source
 
 // The "varying" keyword is for signifying that the texture coordinate will be
 // interpolated and thus varies. 
@@ -55,7 +57,7 @@ void main(void)  {
     vec4 textureMapColor = texture2D(uSampler, vec2(vTexCoord.s, vTexCoord.t));
     vec4 lgtResults = uGlobalAmbientIntensity * uGlobalAmbientColor;
 
-    // now decide if we should illuminate by the light
+    // Add light effects
     lgtResults +=  LightEffect(uLight);
     lgtResults *= textureMapColor;
 
