@@ -63,54 +63,66 @@ class MyGame extends engine.Scene {
         this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
         // sets the background to gray
 
-        let testLight = new engine.LightSource();
-        testLight.getXform().setSize(100, 100);
-        testLight.getXform().setPosition(150, 150);
-        testLight.setLightRange(40);
-        testLight.setBrightness(10);
+        let testLight1 = new engine.LightSource();
+        testLight1.getXform().setSize(100, 100);
+        testLight1.getXform().setPosition(150, 150);
+        testLight1.setLightRange(40);
+        testLight1.setBrightness(10);
+
+        let testLight2 = new engine.LightSource();
+        testLight2.getXform().setSize(100, 100);
+        testLight2.getXform().setPosition(0, 0);
+        testLight2.setLightRange(40);
+        testLight2.setBrightness(10);
+
+        let testLight3 = new engine.LightSource();
+        testLight3.getXform().setSize(100, 100);
+        testLight3.getXform().setPosition(100, 100);
+        testLight3.setLightRange(40);
+        testLight3.setBrightness(10);
+
+        let testLight4 = new engine.LightSource();
+        testLight4.getXform().setSize(100, 100);
+        testLight4.getXform().setPosition(200, 200);
+        testLight4.setLightRange(40);
+        testLight4.setBrightness(10);
+
+        let testLight5 = new engine.LightSource();
+        testLight5.getXform().setSize(100, 100);
+        testLight5.getXform().setPosition(0, 150);
+        testLight5.setLightRange(40);
+        testLight5.setBrightness(10);
+
+        let testLight6 = new engine.LightSource();
+        testLight6.getXform().setSize(100, 100);
+        testLight6.getXform().setPosition(150, 0);
+        testLight6.setLightRange(40);
+        testLight6.setBrightness(10);
+
+        let testLight7 = new engine.LightSource();
+        testLight7.getXform().setSize(100, 100);
+        testLight7.getXform().setPosition(75, 75);
+        testLight7.setLightRange(40);
+        testLight7.setBrightness(10);
+
+        let testLight8 = new engine.LightSource();
+        testLight8.getXform().setSize(100, 100);
+        testLight8.getXform().setPosition(300, 300);
+        testLight8.setLightRange(40);
+        testLight8.setBrightness(10);
 
         //Background object that will be used to test our lighting system
-        this.lightingTest1 = new engine.LightRenderable(this.kBg);
-        this.lightingTest1.getXform().setSize(150, 150);
-        this.lightingTest1.getXform().setPosition(50, 35);
+        this.lightingTest = new engine.LightRenderable(this.kBg);
+        this.lightingTest.getXform().setSize(150, 150);
+        this.lightingTest.getXform().setPosition(50, 35);
         this.lightingTest.addLightSource(testLight1);
-
-        this.lightingTest2 = new engine.LightRenderable(this.kBg);
-        this.lightingTest2.getXform().setSize(150, 150);
-        this.lightingTest2.getXform().setPosition(35, 35);
         this.lightingTest.addLightSource(testLight2);
-
-        this.lightingTest3 = new engine.LightRenderable(this.kBg);
-        this.lightingTest3.getXform().setSize(150, 150);
-        this.lightingTest3.getXform().setPosition(50, 0);
         this.lightingTest.addLightSource(testLight3);
-
-        this.lightingTest4 = new engine.LightRenderable(this.kBg);
-        this.lightingTest4.getXform().setSize(150, 150);
-        this.lightingTest4.getXform().setPosition(20, 0);
         this.lightingTest.addLightSource(testLight4);
-
-        this.lightingTest5 = new engine.LightRenderable(this.kBg);
-        this.lightingTest5.getXform().setSize(150, 150);
-        this.lightingTest5.getXform().setPosition(100, 35);
         this.lightingTest.addLightSource(testLight5);
-
-        this.lightingTest6 = new engine.LightRenderable(this.kBg);
-        this.lightingTest6.getXform().setSize(150, 150);
-        this.lightingTest6.getXform().setPosition(50, 100);
         this.lightingTest.addLightSource(testLight6);
-
-        this.lightingTest7 = new engine.LightRenderable(this.kBg);
-        this.lightingTest7.getXform().setSize(150, 150);
-        this.lightingTest7.getXform().setPosition(0, 0);
         this.lightingTest.addLightSource(testLight7);
-
-        this.lightingTest8 = new engine.LightRenderable(this.kBg);
-        this.lightingTest8.getXform().setSize(150, 150);
-        this.lightingTest8.getXform().setPosition(100, 100);
         this.lightingTest.addLightSource(testLight8);
-
-        this.lightingTest.addLightSource(testLight1);
 
         // Message to display values
         this.mMsg = new engine.FontRenderable("Status Message");
