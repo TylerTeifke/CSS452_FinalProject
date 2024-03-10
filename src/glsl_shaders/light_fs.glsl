@@ -2,6 +2,7 @@
 // Most code gotten from example 8.3 of the book source code
 // The main changes we made were to get rid of the light array as we want the 
 // light renderable class to handle that aspect
+// Code gotten from example 8.3 of the book
 
 precision mediump float; 
     // sets the precision for floating point computation
