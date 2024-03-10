@@ -38,6 +38,14 @@ class MyGame extends engine.Scene {
         // Will be used to test the lighting
         this.lightingTest = null;
 
+        // Will be used for interpolating where the lights need to go
+        this.redLightX = null;
+        this.redLightY = null;
+        this.greenLightX = null;
+        this.greenLightY = null;
+        this.blueLightX = null;
+        this.blueLightY = null;
+
         this.mChoice = 'D';
     }
 
@@ -87,7 +95,7 @@ class MyGame extends engine.Scene {
         let testLight4 = new engine.LightSource();
         testLight4.getXform().setSize(100, 100);
         testLight4.getXform().setPosition(200, 200);
-        testLight4.setLightRange(40);
+        testLight4.setLightRange(400);
         testLight4.setBrightness(3);
 
         let testLight5 = new engine.LightSource();
@@ -150,6 +158,16 @@ class MyGame extends engine.Scene {
         this.mTutorialMsg.setColor([1, 1, 1, 1]);
         this.mTutorialMsg.getXform().setPosition(1, 15);
         this.mTutorialMsg.setTextHeight(2);
+
+        // Will lerp the lights to the player
+        this.redLightX = new Lerp(this.mHero.getXform().getXPos(), 120, 0.05);
+        this.redLightY = new Lerp(this.mHero.getXform().getYPos(), 120, 0.05);
+
+        this.greenLightX = new engine.Lerp(this.mHero.getXform().getXPos(), 120, 0.025);
+        this.greenLightY = new engine.Lerp(this.mHero.getXform().getYPos(), 120, 0.025);
+
+        this.blueLightX = new engine.Lerp(this.mHero.getXform().getXPos(), 120, 0.075);
+        this.blueLightY = new engine.Lerp(this.mHero.getXform().getYPos(), 120, 0.075);
     }
 
     _drawCamera(camera) {
@@ -173,8 +191,7 @@ class MyGame extends engine.Scene {
     // anything from this function!
     update() {
         let zoomDelta = 0.05;
-        let TutorialMsg = "Move light: Arrow Keys\nChange Range: Z/X \nBrightness: J/K \nChange Red Value: Q/W"
-        + "\nChange Green Value: E/R \nChange Blue Value: T/Y \nTurn Light On/off: U";
+        let TutorialMsg = "Move light: Arrow Keys\nTurn Light On/off: U\nMake Lights Follow Player: Space";
         let msg = "";
 
         this.mCamera.update();  // for smoother camera movements
@@ -189,23 +206,6 @@ class MyGame extends engine.Scene {
         if(engine.input.isKeyPressed(engine.input.keys.Two)){
             this.mCurrentLight = 2;
         }
-        /*
-        if(engine.input.isKeyPressed(engine.input.keys.Three)){
-            this.mCurrentLight = 3;
-        }
-        if(engine.input.isKeyPressed(engine.input.keys.Four)){
-            this.mCurrentLight = 4;
-        }
-        if(engine.input.isKeyPressed(engine.input.keys.Five)){
-            this.mCurrentLight = 5;
-        }
-        if(engine.input.isKeyPressed(engine.input.keys.Six)){
-            this.mCurrentLight = 6;
-        }
-        if(engine.input.isKeyPressed(engine.input.keys.Seven)){
-            this.mCurrentLight = 7;
-        }
-        */
 
         //Will change the position of the player
         if (engine.input.isKeyPressed(engine.input.keys.Left)) {
@@ -221,41 +221,13 @@ class MyGame extends engine.Scene {
             this.mHero.getXform().incYPosBy(-1);
         }
 
-        //Will change the range of the light
-        if (engine.input.isKeyPressed(engine.input.keys.Z)) {
-            this.lightingTest.getLightSource(this.mCurrentLight).incLightRangeBy(1);
-        }
-        if (engine.input.isKeyPressed(engine.input.keys.X)) {
-            this.lightingTest.getLightSource(this.mCurrentLight).incLightRangeBy(-1);
+        //Will cause all of the lights to lerp towards the hero
+        if(engine.input.isKeyClicked(engine.input.keys.Space)){
+            this.mLerpToHero = true;
         }
 
-        //Will increase and decrease the brightness of the light
-        if (engine.input.isKeyPressed(engine.input.keys.K)) {
-            this.lightingTest.getLightSource(this.mCurrentLight).incBrightnessBy(0.1);
-        }
-        if (engine.input.isKeyPressed(engine.input.keys.J)) {
-            this.lightingTest.getLightSource(this.mCurrentLight).incBrightnessBy(-0.1);
-        }
-
-        //Will increase and decrease the amount of red/green/blue
-        //is in the light
-        if(engine.input.isKeyPressed(engine.input.keys.W)){
-            this.lightingTest.getLightSource(this.mCurrentLight).incRedBy(0.01);
-        }
-        if(engine.input.isKeyPressed(engine.input.keys.Q)){
-            this.lightingTest.getLightSource(this.mCurrentLight).incRedBy(-0.01);
-        }
-        if(engine.input.isKeyPressed(engine.input.keys.R)){
-            this.lightingTest.getLightSource(this.mCurrentLight).incGreenBy(0.01);
-        }
-        if(engine.input.isKeyPressed(engine.input.keys.E)){
-            this.lightingTest.getLightSource(this.mCurrentLight).incGreenBy(-0.01);
-        }
-        if(engine.input.isKeyPressed(engine.input.keys.Y)){
-            this.lightingTest.getLightSource(this.mCurrentLight).incBlueBy(0.01);
-        }
-        if(engine.input.isKeyPressed(engine.input.keys.T)){
-            this.lightingTest.getLightSource(this.mCurrentLight).incBlueBy(-0.01);
+        if(this.mLerpToHero){
+            this.lerpFunction();
         }
 
         //Will turn the selected light on or off
@@ -280,6 +252,35 @@ class MyGame extends engine.Scene {
 
         this.mMsg.setText(msg);
         this.mTutorialMsg.setText(TutorialMsg);
+    }
+
+    //Will handle the lights moving towards the player
+    lerpFunction(){
+        //Will update the coordinates of the lights using the lerp class
+        this.redLightX.setFinal(this.mHero.getXform().getXPos());
+        this.redLightY.setFinal(this.mHero.getXform().getYPos());
+        this.greenLightX.setFinal(this.mHero.getXform().getXPos());
+        this.greenLightY.setFinal(this.mHero.getXform().getYPos());
+        this.blueLightX.setFinal(this.mHero.getXform().getXPos());
+        this.blueLightY.setFinal(this.mHero.getXform().getYPos());
+
+        this.redLightX.update();
+        this.redLightY.update();
+        this.greenLightX.update();
+        this.greenLightY.update();
+        this.blueLightX.update();
+        this.blueLightY.update();
+
+        let newRedX = this.redLightX.get() * 6.4;
+        let newRedY = this.redLightY.get() * 6.4;
+        let newGreenX = this.greenLightX.get() * 6.4;
+        let newGreenY = this.greenLightY.get() * 6.4;
+        let newBlueX = this.blueLightX.get() * 6.4;
+        let newBlueY = this.blueLightY.get() * 6.4;
+
+        this.lightingTest.getLightSource(0).getXform().setPosition(newRedX, newRedY);
+        this.lightingTest.getLightSource(1).getXform().setPosition(newGreenX, newGreenY);
+        this.lightingTest.getLightSource(2).getXform().setPosition(newBlueX, newBlueY);
     }
 }
 
