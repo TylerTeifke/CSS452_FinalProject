@@ -58,7 +58,9 @@ void main(void)  {
     vec4 lgtResults = uGlobalAmbientIntensity * uGlobalAmbientColor;
 
     // Add light effects
-    lgtResults +=  LightEffect(uLight);
+    for(int i = 0; i < MAX_LIGHTS; i++){
+        lgtResults +=  LightEffect(uLights[i]);
+    }
     lgtResults *= textureMapColor;
 
     // tint the textured area, and leave transparent area as defined by the texture
