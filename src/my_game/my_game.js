@@ -68,24 +68,27 @@ class MyGame extends engine.Scene {
         testLight1.getXform().setPosition(150, 150);
         testLight1.setLightRange(40);
         testLight1.setBrightness(10);
+        testLight1.setColor(1,0,0);
 
         let testLight2 = new engine.LightSource();
         testLight2.getXform().setSize(100, 100);
         testLight2.getXform().setPosition(0, 0);
         testLight2.setLightRange(40);
         testLight2.setBrightness(10);
+        testLight2.setColor(0,1,0);
 
         let testLight3 = new engine.LightSource();
         testLight3.getXform().setSize(100, 100);
         testLight3.getXform().setPosition(100, 100);
         testLight3.setLightRange(40);
         testLight3.setBrightness(10);
+        testLight3.setColor(0,0,1);
 
         let testLight4 = new engine.LightSource();
         testLight4.getXform().setSize(100, 100);
         testLight4.getXform().setPosition(200, 200);
         testLight4.setLightRange(40);
-        testLight4.setBrightness(10);
+        testLight4.setBrightness(3);
 
         let testLight5 = new engine.LightSource();
         testLight5.getXform().setSize(100, 100);
@@ -119,7 +122,7 @@ class MyGame extends engine.Scene {
         this.lightingTest.addLightSource(testLight1);
         this.lightingTest.addLightSource(testLight2);
         this.lightingTest.addLightSource(testLight3);
-        //this.lightingTest.addLightSource(testLight4);
+        this.lightingTest.addLightSource(testLight4);
         //this.lightingTest.addLightSource(testLight5);
         //this.lightingTest.addLightSource(testLight6);
         //this.lightingTest.addLightSource(testLight7);
@@ -128,12 +131,13 @@ class MyGame extends engine.Scene {
         //Will create the player character
         this.mHero = new engine.LightRenderable(this.kMinionSprite);
         this.mHero.setColor([1, 1, 1, 0]);
-        this.mHero.getXform().setSize(100, 100);
-        this.mHero.getXform().setPosition(100, 100);
+        this.mHero.getXform().setSize(10, 15);
+        this.mHero.getXform().setPosition(50, 50);
         this.mHero.setElementPixelPositions(0, 120, 0, 180);
         this.mHero.addLightSource(testLight1);
         this.mHero.addLightSource(testLight2);
         this.mHero.addLightSource(testLight3);
+        this.mHero.addLightSource(testLight4);
 
         // Message to display values
         this.mMsg = new engine.FontRenderable("Status Message");
@@ -203,18 +207,18 @@ class MyGame extends engine.Scene {
         }
         */
 
-        //Will change the position of the light
+        //Will change the position of the player
         if (engine.input.isKeyPressed(engine.input.keys.Left)) {
-            this.lightingTest.getLightSource(this.mCurrentLight).getXform().incXPosBy(-1);
+            this.mHero.getXform().incXPosBy(-1);
         }
         if (engine.input.isKeyPressed(engine.input.keys.Right)) {
-            this.lightingTest.getLightSource(this.mCurrentLight).getXform().incXPosBy(1);
+            this.mHero.getXform().incXPosBy(1);
         }
         if (engine.input.isKeyPressed(engine.input.keys.Up)) {
-            this.lightingTest.getLightSource(this.mCurrentLight).getXform().incYPosBy(1);
+            this.mHero.getXform().incYPosBy(1);
         }
         if (engine.input.isKeyPressed(engine.input.keys.Down)) {
-            this.lightingTest.getLightSource(this.mCurrentLight).getXform().incYPosBy(-1);
+            this.mHero.getXform().incYPosBy(-1);
         }
 
         //Will change the range of the light
