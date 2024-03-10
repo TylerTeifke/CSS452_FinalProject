@@ -160,8 +160,8 @@ class MyGame extends engine.Scene {
         this.mTutorialMsg.setTextHeight(2);
 
         // Will lerp the lights to the player
-        this.redLightX = new Lerp(this.mHero.getXform().getXPos(), 120, 0.05);
-        this.redLightY = new Lerp(this.mHero.getXform().getYPos(), 120, 0.05);
+        this.redLightX = new engine.Lerp(this.mHero.getXform().getXPos(), 120, 0.05);
+        this.redLightY = new engine.Lerp(this.mHero.getXform().getYPos(), 120, 0.05);
 
         this.greenLightX = new engine.Lerp(this.mHero.getXform().getXPos(), 120, 0.025);
         this.greenLightY = new engine.Lerp(this.mHero.getXform().getYPos(), 120, 0.025);
