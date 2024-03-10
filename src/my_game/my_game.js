@@ -113,6 +113,7 @@ class MyGame extends engine.Scene {
 
         //Background object that will be used to test our lighting system
         this.lightingTest = new engine.LightRenderable(this.kBg);
+        this.lightingTest.setElementPixelPositions(0, 1024, 0, 1024);
         this.lightingTest.getXform().setSize(150, 150);
         this.lightingTest.getXform().setPosition(50, 35);
         this.lightingTest.addLightSource(testLight1);

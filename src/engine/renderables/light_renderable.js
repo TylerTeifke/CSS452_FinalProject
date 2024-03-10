@@ -5,10 +5,10 @@
 */
 "use strict";
 
-import TextureRenderable from "./texture_renderable.js";
+import SpriteRenderable from "./sprite_renderable.js";
 import * as shaderResources from "../core/shader_resources.js";
 
-class LightRenderable extends TextureRenderable{
+class LightRenderable extends SpriteRenderable{
     constructor(myTexture){
         super(myTexture);
         super._setShader(shaderResources.getLightShader());
