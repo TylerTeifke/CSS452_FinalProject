@@ -118,11 +118,21 @@ class MyGame extends engine.Scene {
         this.lightingTest.addLightSource(testLight1);
         this.lightingTest.addLightSource(testLight2);
         this.lightingTest.addLightSource(testLight3);
-        this.lightingTest.addLightSource(testLight4);
-        this.lightingTest.addLightSource(testLight5);
-        this.lightingTest.addLightSource(testLight6);
-        this.lightingTest.addLightSource(testLight7);
-        this.lightingTest.addLightSource(testLight8);
+        //this.lightingTest.addLightSource(testLight4);
+        //this.lightingTest.addLightSource(testLight5);
+        //this.lightingTest.addLightSource(testLight6);
+        //this.lightingTest.addLightSource(testLight7);
+        //this.lightingTest.addLightSource(testLight8);
+
+        //Will create the player character
+        this.mHero = new engine.LightRenderable(this.kMinionSprite);
+        this.mHero.setColor([1, 1, 1, 0]);
+        this.mHero.getXform().setSize(100, 100);
+        this.mHero.getXform().setPosition(100, 100);
+        this.mHero.setElementPixelPositions(0, 120, 0, 180);
+        this.mHero.addLightSource(testLight1);
+        this.mHero.addLightSource(testLight2);
+        this.mHero.addLightSource(testLight3);
 
         // Message to display values
         this.mMsg = new engine.FontRenderable("Status Message");
@@ -152,6 +162,7 @@ class MyGame extends engine.Scene {
         this.lightingTest.draw(this.mCamera);
         this.mMsg.draw(this.mCamera);   // only draw status in the main camera
         this.mTutorialMsg.draw(this.mCamera);   // only draw status in the main camera
+        this.mHero.draw(this.mCamera);
     }
     // The update function, updates the application state. Make sure to _NOT_ draw
     // anything from this function!
