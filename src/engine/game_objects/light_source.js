@@ -13,6 +13,7 @@ class LightSource {
         this.lightColor = vec4.fromValues(0.1, 0.1, 0.1, 1);  // light color
         this.lightRange = 5; // range of the light
         this.mPlacement = new Transform();
+        this.mIsOn = true;
     }
 
     // simple setters and getters
@@ -41,6 +42,17 @@ class LightSource {
     setBrightness(val) { this.lightColor[3] = val; }
     getBrightness() { return this.lightColor[3]; }
     incBrightnessBy(delta) { this.lightColor[3] += delta; }
+
+    //Will turn the light on and off
+    turnOnOrOff(){ 
+        if(this.mIsOn == true){
+            this.mIsOn = false;
+        }
+        else{
+            this.mIsOn = true;
+        }
+    }
+    getIsOn() {return this.mIsOn; }
 }
 
 export default LightSource;

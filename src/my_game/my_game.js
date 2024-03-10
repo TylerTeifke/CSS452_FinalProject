@@ -24,6 +24,9 @@ class MyGame extends engine.Scene {
         this.mMsg = null;
         this.mTutorialMsg = null;
 
+        //Will determine which light is being controlled
+        this.mCurrentLight = 0;
+
         // the hero and the support objects
         this.mHero = null;
         this.mBrain = null;
@@ -67,12 +70,47 @@ class MyGame extends engine.Scene {
         testLight.setBrightness(10);
 
         //Background object that will be used to test our lighting system
-        this.lightingTest = new engine.LightRenderable(this.kBg);
-        //this.lightingTest.setElementPixelPositions(0, 1024, 0, 1024);
-        this.lightingTest.getXform().setSize(150, 150);
-        this.lightingTest.getXform().setPosition(50, 35);
+        this.lightingTest1 = new engine.LightRenderable(this.kBg);
+        this.lightingTest1.getXform().setSize(150, 150);
+        this.lightingTest1.getXform().setPosition(50, 35);
+        this.lightingTest.addLightSource(testLight1);
 
-        this.lightingTest.addLightSource(testLight);
+        this.lightingTest2 = new engine.LightRenderable(this.kBg);
+        this.lightingTest2.getXform().setSize(150, 150);
+        this.lightingTest2.getXform().setPosition(35, 35);
+        this.lightingTest.addLightSource(testLight2);
+
+        this.lightingTest3 = new engine.LightRenderable(this.kBg);
+        this.lightingTest3.getXform().setSize(150, 150);
+        this.lightingTest3.getXform().setPosition(50, 0);
+        this.lightingTest.addLightSource(testLight3);
+
+        this.lightingTest4 = new engine.LightRenderable(this.kBg);
+        this.lightingTest4.getXform().setSize(150, 150);
+        this.lightingTest4.getXform().setPosition(20, 0);
+        this.lightingTest.addLightSource(testLight4);
+
+        this.lightingTest5 = new engine.LightRenderable(this.kBg);
+        this.lightingTest5.getXform().setSize(150, 150);
+        this.lightingTest5.getXform().setPosition(100, 35);
+        this.lightingTest.addLightSource(testLight5);
+
+        this.lightingTest6 = new engine.LightRenderable(this.kBg);
+        this.lightingTest6.getXform().setSize(150, 150);
+        this.lightingTest6.getXform().setPosition(50, 100);
+        this.lightingTest.addLightSource(testLight6);
+
+        this.lightingTest7 = new engine.LightRenderable(this.kBg);
+        this.lightingTest7.getXform().setSize(150, 150);
+        this.lightingTest7.getXform().setPosition(0, 0);
+        this.lightingTest.addLightSource(testLight7);
+
+        this.lightingTest8 = new engine.LightRenderable(this.kBg);
+        this.lightingTest8.getXform().setSize(150, 150);
+        this.lightingTest8.getXform().setPosition(100, 100);
+        this.lightingTest.addLightSource(testLight8);
+
+        this.lightingTest.addLightSource(testLight1);
 
         // Message to display values
         this.mMsg = new engine.FontRenderable("Status Message");
@@ -108,66 +146,97 @@ class MyGame extends engine.Scene {
     update() {
         let zoomDelta = 0.05;
         let TutorialMsg = "Move light: Arrow Keys\nChange Range: Z/X \nBrightness: J/K \nChange Red Value: Q/W"
-        + "\nChange Green Value: E/R \nChange Blue Value: T/Y";
+        + "\nChange Green Value: E/R \nChange Blue Value: T/Y \nTurn Light On/off: U";
         let msg = "";
 
         this.mCamera.update();  // for smoother camera movements
 
+        //Will decide which light is being controlled
+        if(engine.input.isKeyPressed(engine.input.keys.Zero)){
+            this.mCurrentLight = 0;
+        }
+        if(engine.input.isKeyPressed(engine.input.keys.One)){
+            this.mCurrentLight = 1;
+        }
+        if(engine.input.isKeyPressed(engine.input.keys.Two)){
+            this.mCurrentLight = 2;
+        }
+        if(engine.input.isKeyPressed(engine.input.keys.Three)){
+            this.mCurrentLight = 3;
+        }
+        if(engine.input.isKeyPressed(engine.input.keys.Four)){
+            this.mCurrentLight = 4;
+        }
+        if(engine.input.isKeyPressed(engine.input.keys.Five)){
+            this.mCurrentLight = 5;
+        }
+        if(engine.input.isKeyPressed(engine.input.keys.Six)){
+            this.mCurrentLight = 6;
+        }
+        if(engine.input.isKeyPressed(engine.input.keys.Seven)){
+            this.mCurrentLight = 7;
+        }
+
         //Will change the position of the light
         if (engine.input.isKeyPressed(engine.input.keys.Left)) {
-            this.lightingTest.getLightSource(0).getXform().incXPosBy(-1);
+            this.lightingTest.getLightSource(this.mCurrentLight).getXform().incXPosBy(-1);
         }
         if (engine.input.isKeyPressed(engine.input.keys.Right)) {
-            this.lightingTest.getLightSource(0).getXform().incXPosBy(1);
+            this.lightingTest.getLightSource(this.mCurrentLight).getXform().incXPosBy(1);
         }
         if (engine.input.isKeyPressed(engine.input.keys.Up)) {
-            this.lightingTest.getLightSource(0).getXform().incYPosBy(1);
+            this.lightingTest.getLightSource(this.mCurrentLight).getXform().incYPosBy(1);
         }
         if (engine.input.isKeyPressed(engine.input.keys.Down)) {
-            this.lightingTest.getLightSource(0).getXform().incYPosBy(-1);
+            this.lightingTest.getLightSource(this.mCurrentLight).getXform().incYPosBy(-1);
         }
 
         //Will change the range of the light
         if (engine.input.isKeyPressed(engine.input.keys.Z)) {
-            this.lightingTest.getLightSource(0).incLightRangeBy(1);
+            this.lightingTest.getLightSource(this.mCurrentLight).incLightRangeBy(1);
         }
         if (engine.input.isKeyPressed(engine.input.keys.X)) {
-            this.lightingTest.getLightSource(0).incLightRangeBy(-1);
+            this.lightingTest.getLightSource(this.mCurrentLight).incLightRangeBy(-1);
         }
 
         //Will increase and decrease the brightness of the light
         if (engine.input.isKeyPressed(engine.input.keys.K)) {
-            this.lightingTest.getLightSource(0).incBrightnessBy(0.1);
+            this.lightingTest.getLightSource(this.mCurrentLight).incBrightnessBy(0.1);
         }
         if (engine.input.isKeyPressed(engine.input.keys.J)) {
-            this.lightingTest.getLightSource(0).incBrightnessBy(-0.1);
+            this.lightingTest.getLightSource(this.mCurrentLight).incBrightnessBy(-0.1);
         }
 
         //Will increase and decrease the amount of red/green/blue
         //is in the light
         if(engine.input.isKeyPressed(engine.input.keys.W)){
-            this.lightingTest.getLightSource(0).incRedBy(0.01);
+            this.lightingTest.getLightSource(this.mCurrentLight).incRedBy(0.01);
         }
         if(engine.input.isKeyPressed(engine.input.keys.Q)){
-            this.lightingTest.getLightSource(0).incRedBy(-0.01);
+            this.lightingTest.getLightSource(this.mCurrentLight).incRedBy(-0.01);
         }
         if(engine.input.isKeyPressed(engine.input.keys.R)){
-            this.lightingTest.getLightSource(0).incGreenBy(0.01);
+            this.lightingTest.getLightSource(this.mCurrentLight).incGreenBy(0.01);
         }
         if(engine.input.isKeyPressed(engine.input.keys.E)){
-            this.lightingTest.getLightSource(0).incGreenBy(-0.01);
+            this.lightingTest.getLightSource(this.mCurrentLight).incGreenBy(-0.01);
         }
         if(engine.input.isKeyPressed(engine.input.keys.Y)){
-            this.lightingTest.getLightSource(0).incBlueBy(0.01);
+            this.lightingTest.getLightSource(this.mCurrentLight).incBlueBy(0.01);
         }
         if(engine.input.isKeyPressed(engine.input.keys.T)){
-            this.lightingTest.getLightSource(0).incBlueBy(-0.01);
+            this.lightingTest.getLightSource(this.mCurrentLight).incBlueBy(-0.01);
+        }
+
+        //Will turn the selected light on or off
+        if(engine.input.isKeyPressed(engine.input.keys.U)){
+            this.lightingTest.getLightSource(this.mCurrentLight).turnOnOrOff();
         }
 
         // I was having issues with how JavaScript can't let me explicitly 
         // define the type to lightSource, so I had to save it in memory
 
-        const lightSource = this.lightingTest.getLightSource(0);
+        const lightSource = this.lightingTest.getLightSource(this.mCurrentLight);
 
         const lightX = lightSource.getXform().getXPos();
         const lightY = lightSource.getXform().getYPos();

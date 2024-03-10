@@ -24,6 +24,7 @@ struct Light  {
     float Near;     // distance in pixel space
     float Far;     // distance in pixel space
     float Intensity;
+    bool isOn;
 };
 
 uniform Light uLights[MAX_LIGHTS];  // Light source
@@ -59,7 +60,9 @@ void main(void)  {
 
     // Add light effects
     for(int i = 0; i < MAX_LIGHTS; i++){
-        lgtResults +=  LightEffect(uLights[i]);
+        if(uLights[i].isOn){
+            lgtResults +=  LightEffect(uLights[i]);
+        }
     }
     lgtResults *= textureMapColor;
 
