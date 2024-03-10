@@ -18,13 +18,13 @@ class ShaderLightAt {
         let gl = glSys.get();
         gl.uniform1i(this.mIsOnRef, aLight.getIsOn());
         // Process a light only when it is switched on
-        if (aLight.isLightOn()) {
-            let p = aCamera.wcPosToPixel(aLight.getXform().getPosition());
-            let n = aCamera.wcSizeToPixel(aLight.getLightRange());
-            let f = aCamera.wcSizeToPixel(aLight.getLightRange() * 2);
+        if (aLight.getIsOn() == true) {
+            let p = aLight.getXform().getPosition();
+            let n = aLight.getLightRange();
+            let f = aLight.getLightRange() * 2;
             let c = aLight.getColor();
             gl.uniform4fv(this.mColorRef, c);
-            gl.uniform2fv(this.mPosRef, vec3.fromValues(p[0], p[1], p[2]));
+            gl.uniform2fv(this.mPosRef, p);
             gl.uniform1f(this.mNearRef, n);
             gl.uniform1f(this.mFarRef, f);
             gl.uniform1f(this.mIntensityRef, aLight.getBrightness());

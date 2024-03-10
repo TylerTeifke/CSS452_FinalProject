@@ -241,7 +241,7 @@ class MyGame extends engine.Scene {
         }
 
         //Will turn the selected light on or off
-        if(engine.input.isKeyPressed(engine.input.keys.U)){
+        if(engine.input.isKeyClicked(engine.input.keys.U)){
             this.lightingTest.getLightSource(this.mCurrentLight).turnOnOrOff();
         }
 

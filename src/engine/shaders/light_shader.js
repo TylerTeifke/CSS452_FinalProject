@@ -17,7 +17,7 @@ class LightShader extends SpriteShader {
         // Call super class constructor
         super(vertexShaderPath, fragmentShaderPath);  // call super class constructor
 
-        this.mLight = null;  // light from the Renderable
+        this.mLights = null;  // light from the Renderable
         this.mCamera = null;  // the camera to draw for, required for WC to DC transform
 
         //global light variables that will make it so the light affects the entire game world
@@ -81,7 +81,7 @@ class LightShader extends SpriteShader {
 
     setCameraAndLight(c, l) {
         this.mCamera = c;
-        this.mLight = l;
+        this.mLights = l;
     }
 }
 
