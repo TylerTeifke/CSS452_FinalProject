@@ -184,6 +184,7 @@ class MyGame extends engine.Scene {
         if(engine.input.isKeyPressed(engine.input.keys.Two)){
             this.mCurrentLight = 2;
         }
+        /*
         if(engine.input.isKeyPressed(engine.input.keys.Three)){
             this.mCurrentLight = 3;
         }
@@ -199,6 +200,7 @@ class MyGame extends engine.Scene {
         if(engine.input.isKeyPressed(engine.input.keys.Seven)){
             this.mCurrentLight = 7;
         }
+        */
 
         //Will change the position of the light
         if (engine.input.isKeyPressed(engine.input.keys.Left)) {
