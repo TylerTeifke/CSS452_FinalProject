@@ -13,9 +13,9 @@ import SecondScene from "./second_scene.js";
 class MyGame extends engine.Scene {
     constructor() {
         super();
-        this.kMinionSprite = "assets/minion_sprite.png";
+        this.kMinionSprite = "assets/Burgular.png";
         this.kMinionPortal = "assets/minion_portal.png";
-        this.kBg = "assets/bg.png";
+        this.kBg = "assets/Scene_One_Background.png";
 
         // The camera to view the scene
         this.mCamera = null;
@@ -219,9 +219,11 @@ class MyGame extends engine.Scene {
         //Will change the position of the player
         if (engine.input.isKeyPressed(engine.input.keys.Left)) {
             this.mHero.getXform().incXPosBy(-1);
+            this.mHero.getXform().setWidth(Math.abs(this.mHero.getXform().getWidth()));
         }
         if (engine.input.isKeyPressed(engine.input.keys.Right)) {
             this.mHero.getXform().incXPosBy(1);
+            this.mHero.getXform().setWidth(-1 * Math.abs(this.mHero.getXform().getWidth()))
         }
         if (engine.input.isKeyPressed(engine.input.keys.Up)) {
             this.mHero.getXform().incYPosBy(1);
@@ -299,3 +301,5 @@ window.onload = function () {
     let myGame = new MyGame();
     myGame.start();
 }
+
+export default MyGame;
