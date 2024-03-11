@@ -194,13 +194,18 @@ class MyGame extends engine.Scene {
     update() {
 
         if (engine.input.isKeyClicked(engine.input.keys.N)) {
+            //Will turn off the blue light
+            if(this.lightingTest.getLightSource(2).getIsOn()){
+                this.lightingTest.getLightSource(2).turnOnOrOff();
+            }
             super.next()
             let myGame = new SecondScene();
             myGame.start();
         }
 
         let zoomDelta = 0.05;
-        let TutorialMsg = "Move light: Arrow Keys\nTurn Light On/off: U\nMake Lights Follow Player: Space";
+        let TutorialMsg = "Move light: Arrow Keys\nTurn Light On/off: U\nMake Lights Follow Player: Space"
+        + "\nControl Lights: 0/1/2";
         let msg = "";
 
         this.mCamera.update();  // for smoother camera movements

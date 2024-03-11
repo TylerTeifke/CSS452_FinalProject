@@ -83,13 +83,6 @@ class SecondScene extends engine.Scene {
         this.lightingTest.getXform().setSize(100, 80);
         this.lightingTest.getXform().setPosition(50, 35);
         this.lightingTest.addLightSource(testLight1);
-        // this.lightingTest.addLightSource(testLight2);
-        // this.lightingTest.addLightSource(testLight3);
-        // this.lightingTest.addLightSource(testLight4);
-        //this.lightingTest.addLightSource(testLight5);
-        //this.lightingTest.addLightSource(testLight6);
-        //this.lightingTest.addLightSource(testLight7);
-        //this.lightingTest.addLightSource(testLight8);
 
         //Will create the player character
         this.mHero = new engine.LightRenderable(this.kMinionSprite);
@@ -148,21 +141,10 @@ class SecondScene extends engine.Scene {
         }
 
         let zoomDelta = 0.05;
-        let TutorialMsg = "Move light: Arrow Keys\nTurn Light On/off: U\nMake Lights Follow Player: Space";
+        let TutorialMsg = "Move Player: Arrow Keys";
         let msg = "";
 
         this.mCamera.update();  // for smoother camera movements
-
-        //Will decide which light is being controlled
-        if (engine.input.isKeyPressed(engine.input.keys.Zero)) {
-            this.mCurrentLight = 0;
-        }
-        if (engine.input.isKeyPressed(engine.input.keys.One)) {
-            this.mCurrentLight = 1;
-        }
-        if (engine.input.isKeyPressed(engine.input.keys.Two)) {
-            this.mCurrentLight = 2;
-        }
 
         //Will change the position of the player
         if (engine.input.isKeyPressed(engine.input.keys.Left)) {
@@ -179,20 +161,6 @@ class SecondScene extends engine.Scene {
         }
 
         this.lightingTest.getLightSource(1).getXform().setPosition(6.4 * (this.mHero.getXform().getXPos()), 6.4 * (this.mHero.getXform().getYPos()));
-
-        //Will cause all of the lights to lerp towards the hero
-        if (engine.input.isKeyClicked(engine.input.keys.Space)) {
-            this.mLerpToHero = true;
-        }
-
-        if (this.mLerpToHero) {
-            this.lerpFunction();
-        }
-
-        //Will turn the selected light on or off
-        if (engine.input.isKeyClicked(engine.input.keys.U)) {
-            this.lightingTest.getLightSource(this.mCurrentLight).turnOnOrOff();
-        }
 
         // I was having issues with how JavaScript can't let me explicitly 
         // define the type to lightSource, so I had to save it in memory
