@@ -8,9 +8,7 @@ import Hero from "./objects/hero.js";
 import Minion from "./objects/minion.js";
 import TextureObject from "./objects/texture_object.js";
 
-import SecondScene from "./second_scene.js";
-
-class MyGame extends engine.Scene {
+class SecondScene extends engine.Scene {
     constructor() {
         super();
         this.kMinionSprite = "assets/minion_sprite.png";
@@ -192,13 +190,6 @@ class MyGame extends engine.Scene {
     // The update function, updates the application state. Make sure to _NOT_ draw
     // anything from this function!
     update() {
-
-        if (engine.input.isKeyClicked(engine.input.keys.N)) {
-            engine.loop.stop()
-            let myGame = new SecondScene();
-            myGame.start();
-        }
-
         let zoomDelta = 0.05;
         let TutorialMsg = "Move light: Arrow Keys\nTurn Light On/off: U\nMake Lights Follow Player: Space";
         let msg = "";
@@ -299,3 +290,5 @@ window.onload = function () {
     let myGame = new MyGame();
     myGame.start();
 }
+
+export default SecondScene;

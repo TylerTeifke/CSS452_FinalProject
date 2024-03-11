@@ -62,6 +62,10 @@ function init(htmlCanvasID) {
     defaultResources.init();
 }
 
+function stop() {
+    loop.stop();
+}
+
 function cleanUp() {
     loop.cleanUp();
     shaderResources.cleanUp();
@@ -90,8 +94,8 @@ export default {
     Lerp, LerpVec2, Oscillate, Shake, ShakeVec2,
 
     // Util classes
-    Camera, Scene, Transform, BoundingBox,  
-    
+    Camera, Scene, Transform, BoundingBox,
+
     // Renderables
     Renderable, TextureRenderable, SpriteRenderable, SpriteAnimateRenderable, FontRenderable, LightRenderable,
 
@@ -102,5 +106,5 @@ export default {
     eTexCoordArrayIndex, eAnimationType, eBoundCollideStatus,
 
     // functions
-    init, cleanUp, clearCanvas
+    init, cleanUp, clearCanvas, stop
 }
