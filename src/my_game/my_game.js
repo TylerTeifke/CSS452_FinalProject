@@ -194,7 +194,7 @@ class MyGame extends engine.Scene {
     update() {
 
         if (engine.input.isKeyClicked(engine.input.keys.N)) {
-            engine.loop.stop()
+            super.next()
             let myGame = new SecondScene();
             myGame.start();
         }

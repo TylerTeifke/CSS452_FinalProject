@@ -190,6 +190,13 @@ class SecondScene extends engine.Scene {
     // The update function, updates the application state. Make sure to _NOT_ draw
     // anything from this function!
     update() {
+
+        if (engine.input.isKeyClicked(engine.input.keys.N)) {
+            super.next()
+            let myGame = new SecondScene();
+            myGame.start();
+        }
+
         let zoomDelta = 0.05;
         let TutorialMsg = "Move light: Arrow Keys\nTurn Light On/off: U\nMake Lights Follow Player: Space";
         let msg = "";
