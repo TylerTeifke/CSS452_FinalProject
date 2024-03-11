@@ -126,8 +126,8 @@ class MyGame extends engine.Scene {
 
         //Background object that will be used to test our lighting system
         this.lightingTest = new engine.LightRenderable(this.kBg);
-        this.lightingTest.setElementPixelPositions(0, 1024, 0, 1024);
-        this.lightingTest.getXform().setSize(150, 150);
+        this.lightingTest.setElementPixelPositions(0, 640, 0, 480);
+        this.lightingTest.getXform().setSize(100, 80);
         this.lightingTest.getXform().setPosition(50, 35);
         this.lightingTest.addLightSource(testLight1);
         this.lightingTest.addLightSource(testLight2);
@@ -141,9 +141,9 @@ class MyGame extends engine.Scene {
         //Will create the player character
         this.mHero = new engine.LightRenderable(this.kMinionSprite);
         this.mHero.setColor([1, 1, 1, 0]);
-        this.mHero.getXform().setSize(10, 15);
+        this.mHero.getXform().setSize(13, 15);
         this.mHero.getXform().setPosition(50, 50);
-        this.mHero.setElementPixelPositions(0, 120, 0, 180);
+        this.mHero.setElementPixelPositions(0, 150, 0, 180);
         this.mHero.addLightSource(testLight1);
         this.mHero.addLightSource(testLight2);
         this.mHero.addLightSource(testLight3);

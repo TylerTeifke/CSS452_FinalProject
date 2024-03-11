@@ -15,7 +15,7 @@ class TextureRenderable extends Renderable {
         super();
         super.setColor([1, 1, 1, 0]); // Alpha of 0: switch off tinting of texture
         super._setShader(shaderResources.getTextureShader());
-        
+
         this.mTexture = null;
         // these two instance variables are to cache texture information
         // for supporting per-pixel accurate collision

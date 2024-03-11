@@ -8,8 +8,8 @@
 import SpriteRenderable from "./sprite_renderable.js";
 import * as shaderResources from "../core/shader_resources.js";
 
-class LightRenderable extends SpriteRenderable{
-    constructor(myTexture){
+class LightRenderable extends SpriteRenderable {
+    constructor(myTexture) {
         super(myTexture);
         super._setShader(shaderResources.getLightShader());
 
@@ -21,7 +21,7 @@ class LightRenderable extends SpriteRenderable{
      * Will draw the light renderable object and all light sources
      * @param {camera} camera 
      */
-    draw(camera){
+    draw(camera) {
         super.draw(camera);
 
         //Will draw all light sources on a light renderable object
@@ -32,7 +32,7 @@ class LightRenderable extends SpriteRenderable{
      * Will return the light source corresponding to the index
      * @param {int} index 
      */
-    getLightSource(index){
+    getLightSource(index) {
         return this.lightSources[index];
     }
 
@@ -40,7 +40,7 @@ class LightRenderable extends SpriteRenderable{
      * Will append a light to the end of the lightSources array
      * @param {lightSource} light 
      */
-    addLightSource(light){
+    addLightSource(light) {
         this.lightSources.push(light);
     }
 
@@ -48,7 +48,7 @@ class LightRenderable extends SpriteRenderable{
      * Will remove the light source in index
      * @param {int} index 
      */
-    removeLightSource(index){
+    removeLightSource(index) {
         this.lightSources.splice(index, 0);
     }
 }

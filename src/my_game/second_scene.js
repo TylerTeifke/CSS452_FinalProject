@@ -17,6 +17,7 @@ class SecondScene extends engine.Scene {
         this.kMinionSprite = "assets/Player.png";
         this.kMinionPortal = "assets/minion_portal.png";
         this.kBg = "assets/SceneTwoBackground.png";
+        this.kBgTwo = "assets/SceneTwoBackgroundCave.png";
 
         // The camera to view the scene
         this.mCamera = null;
@@ -48,12 +49,14 @@ class SecondScene extends engine.Scene {
         engine.texture.load(this.kMinionSprite);
         engine.texture.load(this.kMinionPortal);
         engine.texture.load(this.kBg);
+        engine.texture.load(this.kBgTwo);
     }
 
     unload() {
         engine.texture.unload(this.kMinionSprite);
         engine.texture.unload(this.kMinionPortal);
         engine.texture.unload(this.kBg);
+        engine.texture.unload(this.kBgTwo);
     }
 
     init() {
@@ -70,14 +73,14 @@ class SecondScene extends engine.Scene {
         testLight1.getXform().setSize(100, 100);
         testLight1.getXform().setPosition(320, 240);
         testLight1.setLightRange(1000);
-        testLight1.setBrightness(1);
+        testLight1.setBrightness(0.6);
         testLight1.setColor(1, 1, 1);
 
 
         //Background object that will be used to test our lighting system
         this.lightingTest = new engine.LightRenderable(this.kBg);
-        this.lightingTest.setElementPixelPositions(0, 1024, 0, 1024);
-        this.lightingTest.getXform().setSize(150, 150);
+        this.lightingTest.setElementPixelPositions(0, 640, 0, 480);
+        this.lightingTest.getXform().setSize(100, 80);
         this.lightingTest.getXform().setPosition(50, 35);
         this.lightingTest.addLightSource(testLight1);
         // this.lightingTest.addLightSource(testLight2);
@@ -91,9 +94,9 @@ class SecondScene extends engine.Scene {
         //Will create the player character
         this.mHero = new engine.LightRenderable(this.kMinionSprite);
         this.mHero.setColor([1, 1, 1, 0]);
-        this.mHero.getXform().setSize(10, 15);
+        this.mHero.getXform().setSize(13, 15);
         this.mHero.getXform().setPosition(50, 50);
-        this.mHero.setElementPixelPositions(0, 120, 0, 180);
+        this.mHero.setElementPixelPositions(0, 150, 0, 180);
         this.mHero.addLightSource(testLight1);
 
         let testLight2 = new engine.LightSource();
@@ -101,7 +104,7 @@ class SecondScene extends engine.Scene {
         testLight2.getXform().setPosition(50, 50);
         testLight2.setLightRange(50);
         testLight2.setBrightness(0);
-        testLight2.setColor(0.8, 0, 0.2);
+        testLight2.setColor(0.6, 0, 0.45);
         this.lightingTest.addLightSource(testLight2);
 
         // Message to display values
@@ -164,11 +167,9 @@ class SecondScene extends engine.Scene {
         //Will change the position of the player
         if (engine.input.isKeyPressed(engine.input.keys.Left)) {
             this.mHero.getXform().incXPosBy(-1);
-            this.lightingTest.getLightSource(1).getXform().setPosition(this.mHero.getXform().getXPos(), this.mHero.getXform().getYPos());
         }
         if (engine.input.isKeyPressed(engine.input.keys.Right)) {
             this.mHero.getXform().incXPosBy(1);
-            this.lightingTest.getLightSource(1).getXform().setPosition(this.mHero.getXform().getXPos(), this.mHero.getXform().getYPos());
         }
         if (engine.input.isKeyPressed(engine.input.keys.Up)) {
             this.mHero.getXform().incYPosBy(1);
@@ -176,6 +177,8 @@ class SecondScene extends engine.Scene {
         if (engine.input.isKeyPressed(engine.input.keys.Down)) {
             this.mHero.getXform().incYPosBy(-1);
         }
+
+        this.lightingTest.getLightSource(1).getXform().setPosition(6.4 * (this.mHero.getXform().getXPos()), 6.4 * (this.mHero.getXform().getYPos()));
 
         //Will cause all of the lights to lerp towards the hero
         if (engine.input.isKeyClicked(engine.input.keys.Space)) {
@@ -212,11 +215,13 @@ class SecondScene extends engine.Scene {
         console.log(this.mHero.getXform().getXPos() + " " + this.mHero.getXform().getYPos());
 
         if (this.mHero.getXform().getYPos() < 25) {
-            this.lightingTest.getLightSource(0).setBrightness(0);
-            this.lightingTest.getLightSource(1).setBrightness(0.3);
+            //this.lightingTest.getLightSource(0).setBrightness(0.1);
+            this.lightingTest.getLightSource(1).setBrightness(2);
+            this.lightingTest.setTexture(this.kBgTwo);
         } else {
-            this.lightingTest.getLightSource(0).setBrightness(1);
+            //this.lightingTest.getLightSource(0).setBrightness(1);
             this.lightingTest.getLightSource(1).setBrightness(0);
+            this.lightingTest.setTexture(this.kBg);
         }
     }
 }
